@@ -3,7 +3,8 @@ let guessCount = 1;
 
 document.querySelector('#submit-guess').addEventListener('click', () => {
     // the get guess part
-    const userGuess = Number(document.getElementById('number-guess').value)
+    const guessInputElement = document.getElementById('number-guess')
+    const userGuess = Number(guessInputElement.value)
 
     // check guess
     const guessResult = (userGuess, randomNumber) => {
@@ -20,13 +21,13 @@ document.querySelector('#submit-guess').addEventListener('click', () => {
     document.getElementById('random-number-output').appendChild(newGuessElement)
     
     // reset for next guess
-    document.getElementById('number-guess').value = ''
-    document.getElementById('number-guess').focus()
+    guessInputElement.value = ''
+    guessInputElement.focus()
     guessCount++
 
     if (userGuess === randomNumber || guessCount > 7) {
         // disable input & submit button
-        document.getElementById('number-guess').disabled = true;
+        guessInputElement.disabled = true;
         document.getElementById('submit-guess').disabled = true;
         const element = document.createElement('li');
 
