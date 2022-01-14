@@ -28,26 +28,20 @@ document.querySelector('#submit-guess').addEventListener('click', () => {
         // disable input & submit button
         document.getElementById('number-guess').disabled = true;
         document.getElementById('submit-guess').disabled = true;
-        // if win, set background to green and print !!!You've won!!!
+        const element = document.createElement('li');
+
         if (userGuess === randomNumber) {
             document.getElementById('number-game-container').style.backgroundColor = 'green';
-            
-            const element = document.createElement('li');
             element.textContent = `!!!You've WON!!!`
-            element.style.fontSize = '4rem'
-            element.style.listStyle = 'none'
-            document.getElementById('random-number-output').appendChild(element)
-        }
-        // if lose, set background to red and print !!!You've lost!!!
-        if (guessCount > 7) {
+        } else if (guessCount > 7) {
             document.getElementById('number-game-container').style.backgroundColor = 'red';
-            
-            const element = document.createElement('li');
             element.textContent = `!!!You've LOST!!!`
-            element.style.fontSize = '4rem'
-            element.style.listStyle = 'none'
-            document.getElementById('random-number-output').appendChild(element)
         }
+
+        element.style.fontSize = '4rem'
+        element.style.listStyle = 'none'
+        document.getElementById('random-number-output').appendChild(element)
+
         // add "play another round" button that resets the game
         const resetButton = document.createElement('button');
         resetButton.textContent = 'Play another game'
