@@ -6,35 +6,99 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JS Stuff</title>
 
-    <style>
-        p {
-        font-family: 'helvetica neue', helvetica, sans-serif;
-        letter-spacing: 1px;
-        text-transform: uppercase;
-        text-align: center;
-        border: 2px solid rgba(0,0,200,0.6);
-        background: rgba(0,0,200,0.3);
-        color: rgba(0,0,200,0.6);
-        box-shadow: 1px 1px 2px rgba(0,0,200,0.4);
-        border-radius: 10px;
-        padding: 3px 10px;
-        display: inline-block;
-        cursor: pointer;
-        }
-    </style>
+    <link rel="stylesheet" href="/style.css">
+    <script src="/script.js" defer></script>
+    <script src="/numbers.js" defer></script>
 </head>
 <body>
-    <p>Player 1: Name</p>
+    <a href="/index.html">Home</a>
+    <a href="/links.html">Links</a>
+    <a href="/js-stuff.html">JS Stuff</a>
+    <a href="/level-one/level-one.html">Level One</a>
+    <a href="/level-one/level-two/level-two.html">Level Two</a>
 
-    <script>
-        const para = document.querySelector('p');
+    <h1>JavaScript Stuff</h1>
+    <p>This is a playground for JS dev.</p>
 
-        para.addEventListener('click', updateName);
+    <h2>Part 1</h2>
 
-        function updateName() {
-            const name = prompt('Enter a new name');
-            para.textContent = `Player 1: ${name}`;
-        }
-    </script>
+    <h3>User input/interaction</h3>
+    <p id="name-input">Player 1: Name</p>
+    
+    <h3>The Code</h3>
+    <code>
+
+<pre>
+    const para = document.querySelector('#name-input');
+
+    para.addEventListener('click', updateName);
+
+    function updateName() {
+        const name = prompt('Enter a new name');
+        para.textContent = `Player 1: ${name}`;
+    }</pre>
+
+    </code>
+    
+    <h3>Q & A</h3>
+    <dl>
+        <dt>Is <code>...querySelector('#id')</code> the same as <code>...getElementById('id)</code>?</dt>
+        <dd>Yes, exactly the same!</dd>
+    </dl>
+
+    <h3>Lessons Learned</h3>
+    <p>People interact with a website by clicking and typing.  However, the most fundament action is the mouse click.  Which, the 'website' 'listens' for with <strong>event listers</strong> such as <code>...addEventListener('event', function)</code>.</p>
+
+    <aside>Jan 13<sup>th</sup> 2022, this is when everything clicked!</aside>
+
+    <h2>Part 2: Adding JS to a Page</h2>
+    <h3>The button example</h3>
+    <button id="button1">Click me!</button>
+    <ol id="click-me-output"></ol>
+
+    <h3>Where should JavaScript code be added?</h3>
+    <dl>
+        <dt>In  <code>&lt;script&gt;&lt;/script&gt;</code> tags  immediately before the <code>&lt;/body&gt;</code> tag</dt>
+        <dd><code>
+
+<pre>
+    &lt;script&gt;
+        ...code...
+    &lt;/script&gt;
+&lt;/body&gt;</pre>
+        
+        </code></dd>
+        <dd>As the page is generally parsed from top to bottom, putting the code at the very end allows the HTML to fully load before running your code.</dd>
+
+        <dt>In  <code>&lt;script&gt;&lt;/script&gt;</code> tags  immediately before the <code>&lt;/head&gt;</code> tag</dt>
+        <dd>This requires a workaround as the body has not even started to load.</dd>
+        <dd><code>
+            
+<pre>
+    &lt;script&gt;
+        document.addEventListener('DOMContentLoaded', () => {
+            ...code...
+        });
+    &lt;/script&gt;
+&lt;/head&gt;</pre>
+
+        </code></dd>
+        <dd>This works because it has the browser <strong>listen</strong> for the 'DOMContentLoaded' event (the whole HTML page is loaded) and only then parse the interior JavaScript.</dd>
+
+        <dt>In an external script.js file, linked immediately before the <code>&lt;/head&gt;</code> tag</dt>
+        <dd>This method runs into the same issues as the previous option, but the workaround is much simpler.</dd>
+        <dd><code><pre>    &lt;script src="/script.js" defer&gt;&lt;/script&gt;<br>&lt;/head&gt;</pre></code></dd>
+        <dd>We are able to do away with the DOMContentLoaded code in favor of the <code>defer</code> attribute which accomplishes essentially the same thing.</dd>
+    </dl>
+
+    <div id="number-game-container">
+        <h3>Hot and Cold Numbers</h3>
+        <p>Welcome to our number guessing game! We have randomly picked a number from 1 to 100. Each time you guess, we'll tell you if it's correct, too low, or too high. Seems easy, right?  The catch is, you only have 7 guesses!</p>
+        <label for="number-guess">Enter guess:</label>
+        <input type="number" id="number-guess" min="1" max="100">
+        <button id="submit-guess">Submit Guess</button>
+        <ol id="random-number-output"></ol>
+    </div>
+
 </body>
 </html>
