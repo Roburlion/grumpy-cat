@@ -1,7 +1,15 @@
 let randomNumber = Math.floor(Math.random() * 100) + 1;
 let guessCount = 1;
 
-document.querySelector('#submit-guess').addEventListener('click', () => {
+document.querySelector('#submit-guess').addEventListener('click', guessANumber)
+document.querySelector('#number-guess').addEventListener('keypress', function (e) {
+    console.log('number was entered')
+    if (e.key === 'Enter') {
+        guessANumber();
+    }
+});
+function guessANumber() {
+    console.log('function was called')
     // the get guess part
     const guessInputElement = document.getElementById('number-guess')
     const userGuess = Number(guessInputElement.value)
@@ -30,16 +38,17 @@ document.querySelector('#submit-guess').addEventListener('click', () => {
         guessInputElement.disabled = true;
         document.getElementById('submit-guess').disabled = true;
         const element = document.createElement('li');
-
+        const gameBackgroundColor = document.getElementById('number-game-container');
+        
         if (userGuess === randomNumber) {
-            document.getElementById('number-game-container').style.backgroundColor = 'green';
+            gameBackgroundColor.style.backgroundColor = 'green';
             element.textContent = `!!!You've WON!!!`
         } else if (guessCount > 7) {
-            document.getElementById('number-game-container').style.backgroundColor = 'red';
+            gameBackgroundColor.style.backgroundColor = 'red';
             element.textContent = `!!!You've LOST!!!`
         }
 
-        element.style.fontSize = '4rem'
+        element.style.fontSize = '2.5rem'
         element.style.listStyle = 'none'
         document.getElementById('random-number-output').appendChild(element)
 
@@ -52,4 +61,4 @@ document.querySelector('#submit-guess').addEventListener('click', () => {
             location.reload()
         })
     }
-})
+}

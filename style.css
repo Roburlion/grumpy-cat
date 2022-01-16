@@ -23,6 +23,9 @@ code {
 dt {
     font-weight: bold;
 }
+dd {
+    padding-left: 1rem;
+}
 
 #number-game-container {
     width: 550px;
@@ -32,6 +35,6 @@ dt {
     border-width: 2px;
     border-style: solid;
     border-radius: 5px;
-    padding: 0 2rem;
+    padding: 1.25rem 2rem;
     margin: 0 auto;
 }
